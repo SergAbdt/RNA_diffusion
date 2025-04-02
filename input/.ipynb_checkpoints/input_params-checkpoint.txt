@@ -1,0 +1,120 @@
+# Parameters
+# This line will not be read & similarly blank lines
+
+
+# Initialization parameters
+#   dimension is the number of dimensions of space
+#   sparse determines whether to use the dense chromatin model (if 0) or the sparse chromatin model (if 1)
+#   wall determines whether to add positive wall for low concentrations to the free energy expression (if 1)
+#     (to escape negative concentrations and related numerical error bursts)
+#   plot_flag determines whether to save plots of volume fractions at image control points (if 1, only works for 2D)
+#   output_dir is directory to output data
+
+dimension,3
+sparse,0
+wall,1
+plot_flag,0
+movie_flag,0
+output_dir,"/home/artem.kays/scripts/lncRNAeffects/RNA_diffusion/results/"
+
+
+# Parameters associated with mesh properties
+#   chrom_f is file with 3D coordinates of chromatin bins
+#   chrom_size is half-size of the largest dimension of the resulting mesh
+
+chrom_f,"/home/artem.kays/scripts/lncRNAeffects/RNA_diffusion/data/GSM5851256_MCF7_Rep1/50000_chr11_60000000_70000000.pdb"
+chrom_size,15
+space_scale,1.2
+n_cells,2500
+min_size,0.1
+scale,5
+mesh_min_size,0.5
+
+
+# Simulation parameters
+#   dt is initial step size
+#   dt_max & min are maximum/minimum step sizes that are allowed
+#   dt_up & down are dt increasing/decreasing coefficients
+#   max & min_change is the volume fraction maximum change above/below which simulation stops
+#   total_steps/duration are number of simulation steps/time to run (whichever occurs first)
+#   image_checkpoint and text_log are the frequency of logging simulation data
+#   max_sweeps is the number of sweeps per step
+
+dt,1e-4
+dt_max,0.1
+dt_min,1e-12
+dt_up,2
+dt_down,0.1
+max_change,0.1
+min_change,1e-6
+total_steps,4000
+duration,1500.0
+image_checkpoint,10
+text_log,10
+max_sweeps,2
+
+
+# Define initial concentrations of the protein (phi_p_0) and RNA (phi_r_0)
+phi_p_0,0.04
+phi_r_0,0.0
+
+
+# Sets up free-energy related terms
+#   NP and NR are the lengths of protein and RNA respectively
+#   chi_p is the value of protein-protein pairwise interaction
+#   chi_pr is the value of protein-RNA pairwise interaction
+#   chi_r is the value of RNA-RNA pairwise interaction
+#   sigma_chr is the chromatin thickness
+#   c_RNAchr is the strength of RNA-chromatin interaction
+#   sigma_RNAchr is the scale of RNA-chromatin interaction
+#   wall_k is the height of energy wall for low concentrations
+#   neg_max is the lower concentration threshold for adding an energy wall
+
+NP,5.0
+NR,50.0
+chi_p,1.1
+chi_pr,1.2
+chi_r,2.0
+sigma_chr,0.5
+c_RNAchr,0.1
+sigma_RNAchr,10
+wall_k,1e9
+neg_max,-1e-4
+
+
+# Mobility of protein and RNA
+D_protein,100
+D_rna,10.0
+
+
+# Parameters associated with RNA production and degradation reactions
+#   lncRNA_reactions_flag determines whether to simulate (if 1) RNA production and degradation reactions
+#   lncRNA_gene_bin is chromatin bin number corresponding to the RNA gene
+#   spread_kp_lncRNA is the size of the RNA gene
+#   k_p_max_lncRNA is the rate constant of the RNA production reaction
+#   k_degradation_lncRNA is the rate constant of the RNA degradation reaction
+#   protein_threshold_lncRNA_production is protein volume fraction threshold for RNA production reaction
+
+lncRNA_reactions_flag,1
+lncRNA_gene_bin,106
+spread_kp_lncRNA,0.5
+k_p_max_lncRNA,2.5
+k_degradation_lncRNA,0.02
+protein_threshold_lncRNA_production,0.0
+
+
+# Spatial variable value limits for plots
+phi_p_min_plot,""
+phi_p_max_plot,""
+phi_r_min_plot,""
+phi_r_max_plot,""
+phi_m_min_plot,""
+phi_m_max_plot,""
+mu_p_min_plot,""
+mu_p_max_plot,""
+mu_r_min_plot,""
+mu_r_max_plot,""
+mu_m_min_plot,""
+mu_m_max_plot,""
+free_energy_min_plot,""
+free_energy_max_plot,""

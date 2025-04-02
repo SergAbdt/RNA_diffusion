@@ -1,8 +1,41 @@
-# lncRNAeffects
-Stable code to perform phase field simulations with lncRNAs and transcriptional condensates. This code was written to support this publication in the Biophysical Journal: https://doi.org/10.1016/j.bpj.2023.05.032
+# README
 
-1. The scripts/ directory contains the different scripts that you can run to perform different kinds of phase field simulations. The main script used to run simulations for the paper is ``lncRNAeffect.py``
-2. The use the following command to run code: 
-``` python lncRNAeffect.py --i <path_to_input_parameter_file> --o <storage_folder_for_simulation_data> --p <file_containing_parameter_name_and_values_to_sweep_across> --pN <parameter_number_in_parameter_file>```
-3. The Inputs/ directory contains example input parameter files with descriptions that different scripts in scripts/ take in to run simulations.
-4. The Analysis/ directory contains code to make movies and perform other kinds of data analysis on the data files generated from scripts and generate plots.
+
+Unstable code to perform simulations of RNA diffusion in the nucleus in the presence of chromatin of a particular architecture.
+## Requirements & Installation for Phase-field package
+
+### TLDR Recipe (details below)
+
+`conda create --name <MYFIPYENV> --channel conda-forge python=3.12.8 numpy scipy matplotlib fipy=3.4.5 gmsh=4.13.1 python-gmsh=4.13.1 moviepy`
+
+`activate <MYFIPYENV>`
+
+### Running the code
+
+`./scripts/diffusion.sh -i $infile -o $outfolder [-r $outsuffix] [-p $parameter_file] [-n $pnumber]`
+
+$infile contains the text-file with the input parameters (see input/input_params.txt for reference) in the following format
+
+`param,value \n`
+
+$outfolder contains the path to output_folder
+
+$outsuffix is an optional argument & it contains the suffix to the path to output_folder 
+
+$parameter_file is an optional input file & it contains a list of parameters to iterate over in the following format:
+
+`param`
+
+`value1`
+
+`value2`
+
+$pnumber is an optional argument & it contains the index of the parameter value from \$parameter_file to be used
+
+
+### Long version
+This code is written to employ the latest version of fipy (3.4.5 ) interfacing with py 3.12.8.
+
+The [FiPy webpage](https://www.ctcms.nist.gov/fipy/INSTALLATION.html) has instructions on setting up a specific conda environment with important packages from conda-forge, and installing latest fipy through pip.
+
+_P.S. It should be actually faster with python2.7, but it's not supported yet.
