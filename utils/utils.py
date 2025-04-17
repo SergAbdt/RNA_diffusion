@@ -3,6 +3,7 @@ from numpy.linalg import norm
 import pandas as pd
 from scipy.interpolate import make_interp_spline
 from scipy.spatial import KDTree
+import fipy as fp
 
 
 def parse_chrom(chrom_f, chrom_size, space_scale, n_interp=10):

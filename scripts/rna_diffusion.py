@@ -181,9 +181,6 @@ def run_CH(args):
     phi_p.updateOld()
     phi_r.updateOld()
 
-    if input_parameters['mrna_flag']:
-        phi_m.updateOld()
-
     while (elapsed <= duration) and (steps <= total_steps) and (dt > dt_min):
                 
 #        assert max(phi_r+phi_m) < phi_r_max, "Phi_r value surpassed 1.0. Aborting due to inaccurate approximations"  
@@ -193,14 +190,9 @@ def run_CH(args):
         while sweeps < max_sweeps:
             res1 = eqn0.sweep(dt=dt)
             res2 = eqn1.sweep(dt=dt)
-            if input_parameters['mrna_flag']:
-                res3 = eqn2.sweep(dt=dt)
-            sweeps += 1        
-            
-        if input_parameters['mrna_flag']:
-            delta_state = np.max([np.abs(np.max((phi_p-phi_p.old).value)),np.abs(np.max((phi_r-phi_r.old).value)),np.abs(np.max((phi_m-phi_m.old).value))])
-        else:
-            delta_state = np.max([np.abs(np.max((phi_p-phi_p.old).value)),np.abs(np.max((phi_r-phi_r.old).value))])
+            sweeps += 1
+        
+        delta_state = np.max([np.abs(np.max((phi_p-phi_p.old).value)),np.abs(np.max((phi_r-phi_r.old).value))])
         
         # Write out simulation data to text files
         if steps % input_parameters['text_log'] == 0:
@@ -244,8 +236,6 @@ def run_CH(args):
         time_step.value = dt;
         phi_p.updateOld()
         phi_r.updateOld()
-        if input_parameters['mrna_flag']:
-            phi_m.updateOld()
 
 
     if int(input_parameters['movie_flag']):

@@ -35,7 +35,7 @@ class free_energy_RNA_Chrom_FH:
              self.c_RNAchr/d_chr*np.exp(-d_chr/self.sigma_RNAchr)*phi_r + phi_r*np.log(phi_r)/self.NR) # +
              #self.c_LJ*((self.sigma_LJ/d_chr)**12 - (self.sigma_LJ/d_chr)**6)*(phi_p + phi_r))
 
-        if wall:
+        if self.wall:
              fe += (self.wall_k*(phi_p > 1 - self.neg_max)*(phi_p-self.neg_max)**4 +
                     self.wall_k*(phi_r > 1 - self.neg_max)*(phi_r-self.neg_max)**4)
 
@@ -56,7 +56,7 @@ class free_energy_RNA_Chrom_FH:
                 self.chi_pr*phi_r + 0.5*phi_r**2 + phi_r*phi_p + phi_r**2*phi_p) # +
                 #self.c_LJ*((self.sigma_LJ/d_chr)**12 - (self.sigma_LJ/d_chr)**6))
 
-        if wall:
+        if self.wall:
             mu_p += 4*self.wall_k*(phi_p > 1 - self.neg_max)*(phi_p-self.neg_max)**3
         
         return mu_p
@@ -76,7 +76,7 @@ class free_energy_RNA_Chrom_FH:
                 self.c_RNAchr/d_chr*np.exp(-d_chr/self.sigma_RNAchr) + (1.0+np.log(phi_r))/self.NR) # +
                 #self.c_LJ*((self.sigma_LJ/d_chr)**12 - (self.sigma_LJ/d_chr)**6))
 
-        if wall:
+        if self.wall:
             mu_r += 4*self.wall_k*(phi_r > 1 - self.neg_max)*(phi_r-self.neg_max)**3
 
         return mu_r         
@@ -92,7 +92,7 @@ class free_energy_RNA_Chrom_FH:
         dmu_p_dphi_p = (1/self.NP + phi_p*(1.0-phi_p)**(-1) - 2*self.chi_p*phi_p + 
                         phi_p*phi_r + phi_p*phi_r**2)
 
-        if wall:
+        if self.wall:
             dmu_p_dphi_p += 3*4*self.wall_k*(phi_p > 1 - self.neg_max)*(phi_p-self.neg_max)**2
             
         return dmu_p_dphi_p
@@ -127,7 +127,7 @@ class free_energy_RNA_Chrom_FH:
 
         dmu_r_dphi_r = 1/self.NR + (2.0*self.chi_r + phi_p +  phi_p**2)*phi_r
 
-        if wall:
+        if self.wall:
             dmu_r_dphi_r += 3*4*self.wall_k*(phi_r > 1 - self.neg_max)*(phi_r-self.neg_max)**2
             
         return dmu_r_dphi_r
