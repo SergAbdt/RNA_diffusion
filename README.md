@@ -1,7 +1,7 @@
 # README
 
 
-Unstable code to perform simulations of RNA diffusion in the nucleus in the presence of chromatin of a particular architecture.
+Stable code to perform simulations of RNA diffusion in the nucleus in the presence of chromatin of a particular architecture.
 ## Requirements & Installation for Phase-field package
 
 ### TLDR Recipe (details below)
