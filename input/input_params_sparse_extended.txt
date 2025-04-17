@@ -1,0 +1,143 @@
+# Parameters
+#   Initialization parameters
+#   This line will not be read & similarly blank lines
+dimension,3
+sparse,1
+plot_flag,0
+# circ_flag,1
+# free_energy_type,10
+    
+# Directory to output data
+output_dir,"/home/artem.kays/scripts/RNA_diffusion/results/"
+
+#   Define size of grid (nx,number of cells per dimension), dx , length of cell
+# nx,60
+# dx,0.5
+chrom_f,"/home/artem.kays/scripts/RNA_diffusion/data/GSM5851256_MCF7_Rep1/50000_chr11_60000000_70000000.pdb"
+chrom_size,15
+space_scale,1.2
+n_cells,2500
+min_size,0.1
+scale,5
+mesh_min_size,0.5
+
+#   These represent the concentrations of coexistence for protein alone
+#   If Flory-Huggins potential is employed, they have to be symmetric about 0.5
+# c_alpha,0.2
+# c_beta,0.6
+
+#   Define initial concentrations of the protein and nucleus size
+phi_p_0,0.04
+# nucleus_size,0.0
+# phi_p_nuc,0.0
+phi_r_0,0.0
+# phi_mrna_0,0.0
+# no_phi_0_dist,1.0
+
+#   Mobility of protein and RNA
+D_protein,100
+D_rna,10.0
+# D_mrna,0.1
+# Does the RNA undergo simple diffusion? If set to 0, it would undergo diffusion driven by chemical potential gradients instead
+# rna_diff,0
+
+#   Simulation parameters
+#   dt is initial step size
+#   dt_max & min are maximum/minimum step sizes that are allowed
+#   tolerance is the residual below which simulation stops
+#   total_steps/duration are number of simulation steps/time to run (whichever occurs first)
+#   checkpoint is frequency of logging simulation data
+dt,1e-4
+dt_max,0.1
+dt_min,1e-12
+tolerance,1e-4
+max_change,0.1
+total_steps,2000
+image_checkpoint,50
+text_log,50
+duration,1500.0
+max_sweeps,2
+
+#   Sets up free-energy related terms
+#   fh is a flag for employing Flory-Huggins instead of double-well
+#   changing_chi ,,2 uses the gaussian form & 1 ,, uses double-well LG expression
+#   changing_chi ,,0 is not changing_chi and there for backwards compatability
+#   rho_s/rho_r is height of double-well potential for protein/RNA respectively
+#   kappa is surface tension parameter for protein, default , 0.5
+#   chi is value of pairwise interaction
+#   a,b,c are values of landau-ginzburg like three-way interaction & four way interactions
+#   mu_r chooses whether you use D-R (mu_r,0) or chemical potential fo RNA (mu_r,1)
+NP,5.0
+NR,50.0
+# NM,50.0
+# rho_s,3.0
+# rho_r,2.0
+wall_k,1e9
+neg_max,-1e-4
+# rho_m,2.0
+# rho_c,2.0
+# K,0.2
+# L_R,5.0
+# kappa,0.1
+chi_p,1.1
+chi_pr,1.2
+chi_r,2.0
+# a,0.5
+# b,0.5
+# c,0.5
+# phi_r_max,1.0
+# c_max,0.2
+# sigma,5.0
+# c_LJ,0.2
+# sigma_LJ,0.5
+sigma_chr,0.5
+c_RNAchr,0.02
+sigma_RNAchr,0.5
+
+#  Parameters associated with nucleated lncRNA
+# set_rna_profile_from_file,0
+# rna_profile_filename,""
+# set_rna_profile,0
+# nucleate_seed_RNA,0
+# rna_nucleus_phi,0.0
+# rna_nucleus_distance_to_protein,6.0
+
+# Parameters associated with mRNA production and degradation reactions
+mrna_flag,0
+
+# dirichlet_BC_mRNA,0
+# phi_m_boundary,0.0
+# r_boundary,10.0
+
+# mrna_reaction_rate,2
+# k_p_max,0.025
+# k_degradation,0.02
+# spread_kp,5.0
+# protein_threshold_mRNA_production,0.0
+# n_hill,1.0
+
+# Parameters associated with lncRNA production and degradation reactions
+lncRNA_reactions_flag,1
+lncRNA_reaction_rate,2
+lncRNA_gene_bin,106
+k_p_max_lncRNA,2.5
+k_degradation_lncRNA,0.02
+spread_kp_lncRNA,0.5
+protein_threshold_lncRNA_production,0.0
+# lncRNA_n_hill,1.0
+
+# Parameters associated with graphics
+phi_p_min_plot,""
+phi_p_max_plot,""
+phi_r_min_plot,""
+phi_r_max_plot,""
+phi_m_min_plot,""
+phi_m_max_plot,""
+mu_p_min_plot,""
+mu_p_max_plot,""
+mu_r_min_plot,""
+mu_r_max_plot,""
+mu_m_min_plot,""
+mu_m_max_plot,""
+free_energy_min_plot,""
+free_energy_max_plot,""
