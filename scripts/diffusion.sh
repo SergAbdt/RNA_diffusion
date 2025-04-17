@@ -25,18 +25,25 @@ while [[ $# -gt 0 ]]; do
   esac
 done
 
-path='/home/artem.kays/scripts/lncRNAeffects/RNA_diffusion'
+path='/home/artem.kays/scripts/RNA_diffusion'
+log="$path/results/$o/log.txt"
+
+exec 3>&1 4>&2
+trap 'exec 2>&4 1>&3' 0 1 2 3
+exec 1>>$log 2>&1
 
 
 start=$(date +%s)
+echo "Start: $(date)\n" >&3
+echo "Start: $(date)\n"
 mkdir -p $path/results/$o
-printf "Start: $(date)\n" >> $path/results/$o/log.txt
-# printf "$r\n" >> $path/results/$o/log.txt
+# printf "$r\n"
 
-# nice -n 19
-{ time nice -n 18 python3 $path/scripts/rna_diffusion.py --i $i --o $o --r ${r:-""} --p ${p:-""} --pN ${n:-""} ; } \
-    &> >(grep -v -e '^[[:space:]]*$' -e ALSA -e PYGAME -e Moviepy -e ▊ &>> $path/results/$o/log.txt)
+{ time nice -n 19 python3 $path/scripts/rna_diffusion.py --i $i --o $o --r ${r:-""} --p ${p:-""} --pN ${n:-""} ; } \
+    &> >(grep -v -e '^[[:space:]]*$' -e ALSA -e PYGAME -e Moviepy -e ▊)
     
 end=$(date +%s)
-# printf "Duration: $(date -d@$(($end-$start)) -u +%H:%M:%S)\n" >> $path/results/$o/log.txt
-printf "Finish: $(date)\n\n\n\n" >> $path/results/$o/log.txt
+echo "Duration: $(date -d@$(($end-$start)) -u +%H:%M:%S)\n" >&3
+echo "Finish: $(date)"
+printf "\n\n\n"
+echo "$(date) : Done" >&3
